@@ -111,8 +111,6 @@ public class MemberController extends Controller {
         Member loginedMember = session.getLoginedMember();
         System.out.printf("%s님 환영합니다.\n", loginedMember.name);
 
-
-
     }
 
 

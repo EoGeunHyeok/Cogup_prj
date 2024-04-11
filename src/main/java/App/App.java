@@ -33,7 +33,7 @@ public class App {
         System.out.println("8. 게시물 수정/삭제 : 1 modify/delete  ");
         System.out.println("9. 상담예약 : 3 1  ");
         System.out.println("10. 헬스장 정보 : 4 1  ");
-        System.out.println("11. 출석체크: 5 1  ");
+        System.out.println("11. 출석체크/출석확인: 5 1/2  ");
         System.out.println(" -------------------------------------- ");
 
         MemberController memberController = new MemberController();
@@ -105,6 +105,7 @@ public class App {
                 case "1/modify":
                 case "0/logout":
                 case "3/1":
+                case "5/1":
                     if( Container.getSession().isLogined() == false ) {
                         System.out.println("로그인 후 이용해주세요.");
                         continue;

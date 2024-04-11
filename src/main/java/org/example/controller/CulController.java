@@ -1,5 +1,9 @@
 package org.example.controller;
 
+import org.example.container.Container;
+import org.example.dto.Member;
+import org.example.service.ArticleService;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +19,7 @@ class StuInfo {
     }
 }
 class Students {
+
     private Date date;
     private SimpleDateFormat simpl;
     public ArrayList<StuInfo> studentsInfo = new ArrayList<StuInfo>();
@@ -46,6 +51,8 @@ class Students {
             System.out.println("회원 번호를 잘못 입력하였습니다.");
             return;
         }
+
+
         Date date = new Date();
         SimpleDateFormat sim = new SimpleDateFormat("HH시mm분ss초");
         String str = sim.format(date);
@@ -57,13 +64,13 @@ class Students {
             System.out.println("현재 시각 : " + str);
             System.out.println("정상 출석 입니다.");
             studentsInfo.get(num).checkStatus = "출석";
-            studentsInfo.get(num).checkTime = str; // Storing attendance time
+            studentsInfo.get(num).checkTime = str;
         }
     }
 
     public void studentList() {
         System.out.println("<< 출석 현황 >>");
-        System.out.println("|번호| 이름 | 출석상태 | 출석시간");
+        System.out.println("|번호| 이름 | 출석상태 | 최근 출석시간");
         for (int i = 0; i < studentsInfo.size(); i++) {
             System.out.println("| " + (i + 1) + " |" + studentsInfo.get(i).name + "|  " + studentsInfo.get(i).checkStatus + "     | " + studentsInfo.get(i).checkTime);
         }
@@ -71,6 +78,10 @@ class Students {
     }
 }
 public class CulController extends Controller {
+    private Session session;
+    public CulController() {
+        session = Container.getSession();
+    }
 
     Scanner input = new Scanner(System.in);
     Students students = new Students();
@@ -78,10 +89,28 @@ public class CulController extends Controller {
     public void doAction(String action, String actionMethodName) {
         switch (actionMethodName) {
             case "0":
-                System.out.print("이름을 입력하세요 :");
-                students.joinStudent(input.next());
                 break;
             case "1":
+                Member loginedMember = session.getLoginedMember();
+                if (loginedMember != null) {
+                    // 이미 등록된 회원인지 확인
+                    boolean isRegistered = false;
+                    for (StuInfo student : students.studentsInfo) {
+                        if (student.name.equals(loginedMember.getName())) {
+                            isRegistered = true;
+                            break;
+                        }
+                    }
+
+                    if (!isRegistered) {
+                        students.joinStudent(loginedMember.getName());
+                        System.out.println("로그인한 사용자 \"" + loginedMember.getName() + "\"를 회원 목록에 추가하였습니다.");
+                    } else {
+                        System.out.println("이미 등록된 사용자입니다.");
+                    }
+                } else {
+                    System.out.println("로그인한 사용자 정보를 가져오지 못했습니다.");
+                }
                 students.setDate(new Date());
                 students.setSimpl(new SimpleDateFormat("yyyy년 MM월 dd일"));
                 SimpleDateFormat sim = students.getSimpl();
@@ -91,11 +120,17 @@ public class CulController extends Controller {
                 for (int i = 0; i < students.studentsInfo.size(); i++) {
                     System.out.println((i + 1) + "\t:" + students.studentsInfo.get(i).name);
                 }
+
                 System.out.print("회원 번호를 입력하세요 : ");
                 int num = input.nextInt() - 1;
+                if (!loginedMember.getName().equals(students.studentsInfo.get(num).name)) {
+                    System.out.println("다른 회원에 대해 출석체크할 수 없습니다.");
+                    System.out.println("처음부터 다시 시도해주세요.");
+                    return;
+                }
                 students.studentCheck(num);
                 break;
-            case "3":
+            case "2":
                 students.studentList();
                 break;
             default:
