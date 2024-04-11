@@ -1,9 +1,24 @@
-package org.example.file;
+package org.example.controller;
 
 import java.util.Scanner;
 
-public class Information {
-    public static void infotmation(int[] pit) {
+public class InformationController extends Controller {
+    private int[] pit;
+
+    public InformationController(int[] pit) {
+        this.pit = pit;
+    }
+    public void doAction(String action, String actionMethodName) {
+        switch (actionMethodName) {
+            case "1":
+                information(pit);
+                break;
+            default:
+                System.out.println("존재하지 않는 명령어 입니다.");
+                break;
+        }
+    }
+    public static void information(int[] pit) {
         Scanner v = new Scanner(System.in);
         int pax = 2;
 
@@ -59,7 +74,4 @@ public class Information {
         System.out.println();
         System.out.printf("입력 : ");
     }
-
 }
-
-

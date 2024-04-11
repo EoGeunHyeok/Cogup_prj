@@ -1,8 +1,26 @@
-package org.example.file;
+package org.example.controller;
 
 import java.util.Scanner;
 
-public class Reservation {
+public class CheckController extends Controller {
+    private int[] seat;
+
+    public CheckController(int[] seat) {
+        this.seat = seat;
+    }
+
+    @Override
+    public void doAction(String cmd, String actionMethodName) {
+        switch (actionMethodName) {
+            case "1":
+                reserveTime(seat);
+                break;
+            default:
+                System.out.println("존재하지 않는 명령어 입니다.");
+                break;
+        }
+    }
+
     public static void printAvailableTimes(int[] seat) {
         System.out.println("※※ 금일 예약 가능한 시간은 ※※ ");
         for (int i = 0; i < seat.length; i++) {
@@ -13,9 +31,6 @@ public class Reservation {
         System.out.println();
         System.out.printf("예약 타임 : ");
     }
-
-
-
 
     public static void reserveTime(int[] seat) {
         Scanner v = new Scanner(System.in);
