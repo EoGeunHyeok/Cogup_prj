@@ -10,7 +10,7 @@ public class InformationController extends Controller {
     }
     public void doAction(String action, String actionMethodName) {
         switch (actionMethodName) {
-            case "1":
+            case "정보":
                 information(pit);
                 break;
             default:
@@ -60,8 +60,11 @@ public class InformationController extends Controller {
                     pit[y - 1] = 0;
                     pax++;
                     System.out.println("♣♣♣ 이동이 되었습니다. ♣♣♣");
+                    System.out.println("◎◎초기 화면 입니다.◎◎");
+
                 } else {
                     System.out.println("♣♣♣ 이동이 되었습니다. ♣♣♣");
+                    System.out.println("◎◎초기 화면 입니다.◎◎");
                 }
             }
             return;

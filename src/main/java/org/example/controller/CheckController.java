@@ -15,10 +15,10 @@ public class CheckController extends Controller {
     @Override
     public void doAction(String cmd, String actionMethodName) {
         switch (actionMethodName) {
-            case "1":
+            case "예약":
                 reserveTime(seat, reservations);
                 break;
-            case "2":
+            case "취소":
                 cancelReservation(seat, reservations);
                 break;
             default:

@@ -23,13 +23,13 @@ public class MemberController extends Controller {
 
     public void doAction(String cmd, String actionMethodName){
         switch (actionMethodName){
-            case "1":
+            case "가입":
                 doJoin();
                 break;
-            case "2":
+            case "로그인":
                 doLogin();
                 break;
-            case "3":
+            case "로그아웃":
                 doLogout();
                 break;
 
@@ -115,11 +115,11 @@ public class MemberController extends Controller {
 
 
     private void doLogout() {
-        //* if ( isLogined()==false){
-        // System.out.println("로그인 상태가 아닙니다.");
-        // return;
-        // }
-
+        /*if (session.getLoginedMember() == null) {
+            System.out.println("로그인 후 이용해주세요.");
+            return;
+        }
+*/
         session.setLoginedMember(null);
         System.out.println("로그아웃 되었습니다.");
     }

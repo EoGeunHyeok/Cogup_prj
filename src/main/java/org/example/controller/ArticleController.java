@@ -34,26 +34,20 @@ public class ArticleController extends Controller {
         this.cmd = cmd;
 
         switch (actionMethodName) {
-            case "write":
+            case "작성":
                 doWrite();
                 break;
-            case "list":
+            case "목록":
                 showList();
                 break;
-            case "detail":
+            case "검색":
                 showDetail();
                 break;
-            case "modify":
+            case "수정":
                 doModify();
                 break;
-            case "delete":
+            case "삭제":
                 doDelete();
-            case "currentBoard":
-                doCurrentBoard();
-                break;
-            case "changeBoard":
-                doChangeBoard();
-                break;
             default:
                 System.out.println("존재하지 않는 명령어 입니다.");
                 break;
@@ -61,29 +55,6 @@ public class ArticleController extends Controller {
 
     }
 
-    private void doChangeBoard() {
-        System.out.println("1. 공지 게시판");
-        System.out.println("2. 오늘의 한마디 게시판");
-        System.out.println("게시판 번호를 입력하세요)");
-
-
-
-        int boardId = checkScNum();
-        Board board = articleService.getBoard(boardId);
-
-
-        if (board == null) {
-            System.out.println("해당 게시판은 존재하지 않습니다.");
-        } else {
-            System.out.printf("[%s 게시판]으로 변경되었습니다.\n ", board.getName());
-            session.setCurrentBoard(board);
-        }
-    }
-
-    private void doCurrentBoard() {
-        Board board = session.getCurrentBoard();
-        System.out.printf("현 게시판 : [%s 게시판]\n", board.getName());
-    }
 
 
     public void doWrite() {

@@ -22,18 +22,15 @@ public class App {
     public void start() {
         System.out.println("== GMS ==");
         System.out.println(" -------------------------------------- ");
-        System.out.println("= 명령어 모음 =");
-        System.out.println("1. 회원가입 : 0 1");
-        System.out.println("2. 로그인/로그아웃 : 0 2/3");
-        System.out.println("3. 현재 게시판 확인 : 1 currentBoard");
-        System.out.println("4. 게시판 변경 : 1 changeBoard");
-        System.out.println("5. 게시물 리스트 : 1 list");
-        System.out.println("6. 게시물 상세 : 1 detail ");
-        System.out.println("7. 게시물 작성(로그인후 이용) : 1 write ");
-        System.out.println("8. 게시물 수정/삭제 : 1 modify/delete  ");
-        System.out.println("9. 상담예약 : 3 1  ");
-        System.out.println("10. 헬스장 정보 : 4 1  ");
-        System.out.println("11. 출석체크/출석확인: 5 1/2  ");
+        System.out.println("= 검색어 모음 =");
+        System.out.println("★★ 띄어쓰기 주의해 주세요! ★★");
+        System.out.println("1. 회원 가입 / 회원 로그인 / 회원 로그아웃");
+        System.out.println("2. 게시글 작성 / 게시글 리스트/ 게시글 검색/ 게시글 수정");
+        System.out.println("   게시글 삭제/ 게시글 변경");
+        System.out.println("4. 게시판 확인 / 게시판 변경");
+        System.out.println("5. 상담 예약/ 상담 취소 ");
+        System.out.println("6. 헬스장 정보 ");
+        System.out.println("7. 출석 체크 / 출석 확인");
         System.out.println(" -------------------------------------- ");
 
         MemberController memberController = new MemberController();
@@ -42,12 +39,13 @@ public class App {
         CheckController checkController = new CheckController(seats);
         InformationController informationController = new InformationController(pit);
         CulController culController = new CulController();
+        BoardController boardController = new BoardController();
 
 
 
         while (true) {
 
-            System.out.printf("명령어 입력 : ");
+            System.out.printf("검색어 입력 : ");
             String cmd = Container.getScanner().nextLine();
             cmd = cmd.trim();
 
@@ -55,7 +53,7 @@ public class App {
                 continue;
             }
 
-            if (cmd.equals("exit")) {
+            if (cmd.equals("종료")) {
                 break;
             }
 
@@ -70,25 +68,29 @@ public class App {
 
             Controller controller = null;
 
-            if ( controllerName.equals("1")){
+            if ( controllerName.equals("게시글")){
                 controller = articleController;
             }
-            else if ( controllerName.equals("0")){
+            else if ( controllerName.equals("회원")){
                 controller = memberController;
             }
             else if ( controllerName.equals("2")){
                 controller = exportController;
             }
-            else if (controllerName.equals("3")){
+            else if (controllerName.equals("상담")){
                 controller = checkController;
 
             }
-            else if (controllerName.equals("4")){
+            else if (controllerName.equals("헬스장")){
                 controller = informationController;
 
             }
-            else if (controllerName.equals("5")){
+            else if (controllerName.equals("출석")){
                 controller = culController;
+
+            }
+            else if (controllerName.equals("게시판")){
+                controller = boardController;
 
             }
 
@@ -100,13 +102,14 @@ public class App {
             String actionName = controllerName + "/" + actionMethodName;
 
             switch ( actionName ){
-                case "1/write":
-                case "1/delete":
-                case "1/modify":
-                case "0/logout":
-                case "3/1":
-                case "5/1":
-                case "5/2":
+                case "게시물/작성":
+                case "게시물/삭제":
+                case "게시물/수정":
+                case "회원/로그아웃":
+                case "상담/예약":
+                case "상담/취소":
+                case "출석/체크":
+                case "출석/확인":
                     if( Container.getSession().isLogined() == false ) {
                         System.out.println("로그인 후 이용해주세요.");
                         continue;
@@ -115,8 +118,8 @@ public class App {
             }
 
             switch ( actionName ){
-                case "0/2":
-                case "0/1":
+                case "회원/로그인":
+                case "회원/가입":
 
                     if( Container.getSession().isLogined() ) {
                         System.out.println("로그아웃 후 이용해주세요.");
