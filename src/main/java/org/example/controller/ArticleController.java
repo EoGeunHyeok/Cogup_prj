@@ -63,7 +63,7 @@ public class ArticleController extends Controller {
 
     private void doChangeBoard() {
         System.out.println("1. 공지 게시판");
-        System.out.println("2. 자유 게시판");
+        System.out.println("2. 오늘의 한마디 게시판");
         System.out.println("게시판 번호를 입력하세요)");
 
 
@@ -87,6 +87,11 @@ public class ArticleController extends Controller {
 
 
     public void doWrite() {
+
+        if (isNoticeBoard() && !isAdmin()) {
+            System.out.println("해당 게시판에서는 관리자만 글을 작성할 수 있습니다.");
+            return;
+        }
 
         System.out.printf("제목 : ");
         String title = sc.nextLine();
@@ -226,7 +231,19 @@ public class ArticleController extends Controller {
             return;
         }
 
+        if (!isNoticeBoard()) {
+            System.out.println("해당 게시판에서는 글을 수정할 수 없습니다.");
+            return;
+        }
+
+
+        if (!isAdmin()) {
+            System.out.println("관리자만 글을 수정할 수 있습니다.");
+            return;
+        }
+
         Member loginedMember = session.getLoginedMember();
+
 
         if (foundArticle.memberId != loginedMember.id) {
             System.out.printf("권한이 없습니다.\n");
@@ -263,7 +280,7 @@ public class ArticleController extends Controller {
 
         Member loginedMember = session.getLoginedMember();
 
-        if (foundArticle.memberId != loginedMember.id) {
+        if (!isAdmin() && foundArticle.memberId != loginedMember.id) {
             System.out.printf("권한이 없습니다.\n");
             return;
         }
@@ -286,5 +303,14 @@ public class ArticleController extends Controller {
             return 0;
         }
         return id;
+    }
+    private boolean isNoticeBoard() {
+
+        return session.getCurrentBoard().getId() == 1;
+    }
+
+    private boolean isAdmin() {
+
+        return session.isLogined() && session.getLoginedMember().getLoginId().equals("admin");
     }
 }

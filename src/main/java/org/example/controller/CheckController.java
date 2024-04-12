@@ -101,7 +101,7 @@ public class CheckController extends Controller {
             if (seat[y - 1] == 0) {
                 System.out.println("확인 비밀번호를 입력해주세요. : ");
                 String name = v.next();
-                reservations[y - 1] = name; // 해당 시간의 예약자 이름 저장
+                reservations[y - 1] = name;
                 System.out.println("★★★ 예약이 완료되었습니다. ★★★ ");
                 seat[y - 1] = 1;
                 pax--;
@@ -111,7 +111,7 @@ public class CheckController extends Controller {
                 if (cancel.equalsIgnoreCase("1")) {
                     seat[y - 1] = 0;
                     pax++;
-                    reservations[y - 1] = null; // 취소 시 예약자 정보 제거
+                    reservations[y - 1] = null;
                     System.out.println("♣♣♣ 예약이 취소되었습니다. ♣♣♣");
                 } else {
                     System.out.println("♣♣♣ 예약이 완료되었습니다. ♣♣♣");

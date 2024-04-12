@@ -12,7 +12,7 @@ import java.util.Scanner;
 class StuInfo {
     String name;
     String checkStatus = " 미출석  ";
-    String checkTime; // New field to store attendance time
+    String checkTime;
 
     public StuInfo(String name) {
         this.name = name;
