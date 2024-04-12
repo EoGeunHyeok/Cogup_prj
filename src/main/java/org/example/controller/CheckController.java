@@ -5,20 +5,70 @@ import java.util.Scanner;
 public class CheckController extends Controller {
     private int[] seat;
 
+    private String[] reservations;
+
     public CheckController(int[] seat) {
         this.seat = seat;
+        this.reservations = new String[seat.length];
     }
 
     @Override
     public void doAction(String cmd, String actionMethodName) {
         switch (actionMethodName) {
             case "1":
-                reserveTime(seat);
+                reserveTime(seat, reservations);
+                break;
+            case "2":
+                cancelReservation(seat, reservations);
                 break;
             default:
                 System.out.println("존재하지 않는 명령어 입니다.");
                 break;
         }
+    }
+
+    public void cancelReservation(int[] seat, String[] reservations) {
+        Scanner scanner = new Scanner(System.in);
+        printReservedTimes(seat, reservations);
+        System.out.println("예약을 취소하실 시간을 입력해주세요:");
+        int timeSlot = scanner.nextInt();
+
+        if (timeSlot < 1 || timeSlot > 6) {
+            System.out.println("잘못된 입력입니다.");
+            return;
+        }
+
+        if (seat[timeSlot - 1] == 1) {
+            System.out.println("확인 비밀번호를 입력해주세요 :");
+            String name = scanner.next();
+            if (name.equals(reservations[timeSlot - 1])) {
+                seat[timeSlot - 1] = 0;
+                reservations[timeSlot - 1] = null;
+                System.out.println("예약이 취소되었습니다.");
+            } else {
+                System.out.println("비밀번호가 일치하지 않습니다.");
+            }
+        } else {
+            System.out.println("해당 시간은 예약되어 있지 않습니다.");
+        }
+    }
+
+    public static void printReservedTimes(int[] seat, String[] reservations) {
+        System.out.println("※※ 예약된 시간 목록 ※※ ");
+        boolean reserved = false;
+        for (int i = 0; i < seat.length; i++) {
+            if (seat[i] == 1) {
+                System.out.printf(" [%d 타임]", i + 1);
+                reserved = true;
+            }
+        }
+        if (!reserved) {
+            System.out.println("예약된 시간이 없습니다.");
+
+        }
+
+        System.out.println();
+
     }
 
     public static void printAvailableTimes(int[] seat) {
@@ -32,7 +82,7 @@ public class CheckController extends Controller {
         System.out.printf("예약 타임 : ");
     }
 
-    public static void reserveTime(int[] seat) {
+    public static void reserveTime(int[] seat, String[] reservations) {
         Scanner v = new Scanner(System.in);
         int pax = 6;
 
@@ -49,6 +99,9 @@ public class CheckController extends Controller {
             }
 
             if (seat[y - 1] == 0) {
+                System.out.println("확인 비밀번호를 입력해주세요. : ");
+                String name = v.next();
+                reservations[y - 1] = name; // 해당 시간의 예약자 이름 저장
                 System.out.println("★★★ 예약이 완료되었습니다. ★★★ ");
                 seat[y - 1] = 1;
                 pax--;
@@ -58,6 +111,7 @@ public class CheckController extends Controller {
                 if (cancel.equalsIgnoreCase("1")) {
                     seat[y - 1] = 0;
                     pax++;
+                    reservations[y - 1] = null; // 취소 시 예약자 정보 제거
                     System.out.println("♣♣♣ 예약이 취소되었습니다. ♣♣♣");
                 } else {
                     System.out.println("♣♣♣ 예약이 완료되었습니다. ♣♣♣");
