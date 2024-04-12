@@ -106,6 +106,7 @@ public class App {
                 case "0/logout":
                 case "3/1":
                 case "5/1":
+                case "5/2":
                     if( Container.getSession().isLogined() == false ) {
                         System.out.println("로그인 후 이용해주세요.");
                         continue;

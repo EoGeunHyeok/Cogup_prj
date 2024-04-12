@@ -231,14 +231,8 @@ public class ArticleController extends Controller {
             return;
         }
 
-        if (!isNoticeBoard()) {
-            System.out.println("해당 게시판에서는 글을 수정할 수 없습니다.");
-            return;
-        }
-
-
-        if (!isAdmin()) {
-            System.out.println("관리자만 글을 수정할 수 있습니다.");
+        if (isNoticeBoard() && !isAdmin()) {
+            System.out.println("해당 게시판에서는 관리자만 글을 작성할 수 있습니다.");
             return;
         }
 
