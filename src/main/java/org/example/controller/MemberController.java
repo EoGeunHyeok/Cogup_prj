@@ -21,8 +21,8 @@ public class MemberController extends Controller {
         session = Container.getSession();
     }
 
-    public void doAction(String cmd, String actionMethodName){
-        switch (actionMethodName){
+    public void doAction(String cmd, String actionMethodName) {
+        switch (actionMethodName) {
             case "가입":
                 doJoin();
                 break;
@@ -32,13 +32,29 @@ public class MemberController extends Controller {
             case "로그아웃":
                 doLogout();
                 break;
+            case "정보":
+                doMemberInfo();
+                break;
+
 
             default:
                 System.out.println("존재하지 않는 명령어 입니다.");
                 break;
         }
+    }
 
 
+    public void doMemberInfo() {
+        Member loginedMember = session.getLoginedMember();
+        if (loginedMember == null) {
+            System.out.println("로그인 후 이용해주세요.");
+            return;
+        }
+
+        System.out.println("회원 정보 확인");
+        System.out.println("이름: " + loginedMember.getName());
+        System.out.println("아이디: " + loginedMember.getLoginId());
+        System.out.println("비밀번호: " + loginedMember.getLoginPw());
 
     }
 

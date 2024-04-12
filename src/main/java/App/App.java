@@ -20,17 +20,16 @@ public class App {
     }
 
     public void start() {
-        System.out.println("== GMS ==");
-        System.out.println(" -------------------------------------- ");
-        System.out.println("= 검색어 모음 =");
-        System.out.println("★★ 띄어쓰기 주의해 주세요! ★★");
-        System.out.println("1. 회원 가입 / 회원 로그인 / 회원 로그아웃");
-        System.out.println("2. 게시글 작성 / 게시글 리스트/ 게시글 검색/ 게시글 수정");
-        System.out.println("   게시글 삭제/ 게시글 변경");
+        System.out.println("         == GMS ==       ");
+        System.out.println("       = 검색어 모음 =    ");
+        System.out.println("★★★★ 띄어쓰기 주의해 주세요! ★★★★");
+        System.out.println("1. 회원 가입 / 회원 로그인 / 회원 로그아웃 / 회원 정보");
+        System.out.println("2. 게시글 작성 / 게시글 삭제/ 게시글 변경 / 게시글 수정 --> 회원전용.");
+        System.out.println("   게시글 목록/ 게시글 검색 ");
         System.out.println("4. 게시판 확인 / 게시판 변경");
-        System.out.println("5. 상담 예약/ 상담 취소 ");
+        System.out.println("5. 상담 예약/ 상담 취소 --> 회원전용.");
         System.out.println("6. 헬스장 정보 ");
-        System.out.println("7. 출석 체크 / 출석 확인");
+        System.out.println("7. 출석 체크 / 출석 확인 --> 회원전용.");
         System.out.println(" -------------------------------------- ");
 
         MemberController memberController = new MemberController();

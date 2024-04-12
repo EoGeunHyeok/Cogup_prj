@@ -65,5 +65,6 @@ public class MemberDao extends Dao {
         }
         return new Member(row);
     }
+
 }
 
