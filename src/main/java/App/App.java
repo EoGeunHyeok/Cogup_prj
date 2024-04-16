@@ -39,7 +39,7 @@ public class App {
         InformationController informationController = new InformationController(pit);
         CulController culController = new CulController();
         BoardController boardController = new BoardController();
-
+        SearchController searchController = new SearchController();
 
 
         while (true) {
@@ -90,6 +90,11 @@ public class App {
             }
             else if (controllerName.equals("게시판")){
                 controller = boardController;
+
+            }
+
+            else if (controllerName.equals("검색어")){
+                controller = searchController;
 
             }
 

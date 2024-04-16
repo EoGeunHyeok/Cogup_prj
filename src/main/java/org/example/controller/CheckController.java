@@ -6,6 +6,12 @@ public class CheckController extends Controller {
     private int[] seat;
 
     private String[] reservations;
+    public int[] getSeats() {
+        return this.seat;
+    }
+    public String[] getReservations() {
+        return this.reservations;
+    }
 
     public CheckController(int[] seat) {
         this.seat = seat;

@@ -17,6 +17,7 @@ public class Container {
     public static DBConnection dbConnection;
     public static ArticleDao articleDao;
     public static MemberDao memberDao;
+
     public static ArticleService articleService;
     public static MemberService memberService;
     public static ExportService exportService;
@@ -24,6 +25,7 @@ public class Container {
     static {
         articleDao = new ArticleDao();
         memberDao = new MemberDao();
+        
         articleService = new ArticleService();
         memberService = new MemberService();
         exportService = new ExportService();
