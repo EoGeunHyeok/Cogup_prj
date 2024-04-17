@@ -50,18 +50,12 @@ public class MemberController extends Controller {
             System.out.println("로그인 후 이용해주세요.");
             return;
         }
-        CheckController checkController = new CheckController(new int[6]);
-        int[] seat = checkController.getSeats(); // getSeats() 메서드로 수정
-        String[] reservations = checkController.getReservations();
 
         System.out.println("회원 정보 확인");
         System.out.println("이름: " + loginedMember.getName());
         System.out.println("아이디: " + loginedMember.getLoginId());
         System.out.println("비밀번호: " + loginedMember.getLoginPw());
 
-
-        System.out.println("금일 예약된 시간 정보:");
-        CheckController.printReservedTimes(seat, reservations);
     }
 
     public void doJoin() {
