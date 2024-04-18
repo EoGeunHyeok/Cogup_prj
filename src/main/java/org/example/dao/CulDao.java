@@ -13,7 +13,7 @@ import java.sql.SQLException;
 @Getter
 @Setter
 public class CulDao extends Dao {
-    private DBConnection dbConnection;
+    public DBConnection dbConnection;
 
     public CulDao() {
         this.dbConnection = Container.getDBConnection();

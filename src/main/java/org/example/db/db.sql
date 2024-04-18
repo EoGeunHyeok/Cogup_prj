@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS sbs_proj;
 CREATE DATABASE sbs_proj;
 USE sbs_proj;
 
+
+
 CREATE TABLE article (
 id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 regDate DATETIME NOT NULL,
@@ -10,7 +12,9 @@ title CHAR(100) NOT NULL,
 `body` TEXT NOT NULL,
 memberId INT(10) UNSIGNED NOT NULL,
 boardId INT(10) UNSIGNED NOT NULL,
+hit INT(100) UNSIGNED NOT NULL,
 INDEX boardId(`boardId`)
+
 );
 
 INSERT INTO article
@@ -95,14 +99,22 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user',
 loginPw = 'user',
-`name` = '황예지';
+`name` = '예지';
 
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user1',
 loginPw = 'user1',
-`name` = '신유나';
+`name` = '유나';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'qwer',
+loginPw = 'qwer',
+`name` = '채령';
+
 
 SELECT * FROM `member`;
 
@@ -126,10 +138,58 @@ updateDate = NOW(),
 `code` = 'free',
 `name` = '자유';
 
+# 신규 추가 부분
+
+DROP TABLE `Check`;
+
+CREATE TABLE `Check` ( #예약
+     id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `time` DATETIME NOT NULL,
+    `reservation` CHAR(100) UNIQUE NOT NULL UNIQUE,
+     pw CHAR(100) NOT NULL,
+    `name` CHAR(100) NOT NULL
+);
+
+INSERT INTO `check`
+SET `time` = NOW(),
+`reservation` = '7',
+pw = '123'
+`name` = '짱구';
+
+
+
+
+DROP TABLE Cul;
+
+
+CREATE TABLE Cul (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    member_name CHAR(100) UNIQUE NOT NULL,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `STATUS` VARCHAR(20) NOT NULL
+);
+
+INSERT INTO Cul
+SET member_name = '호올리',
+regDate = NOW(),
+updateDate = NOW(),
+`status` = '미출석';
+
+
+INSERT INTO Cul ( member_name, regDate, updateDate, STATUS)
+VALUES ( '유리', NOW(), NOW(), '출석');
+
+SELECT * FROM Cul;
+
 SELECT * FROM board;
 
 SELECT * FROM article;
 
 SELECT * FROM `member`;
+
+SELECT * FROM `Check`;
+
+SELECT * FROM Cul;
 
 

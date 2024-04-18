@@ -16,6 +16,51 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`sbs_proj` /*!40100 DEFAULT CHARACTER SE
 
 USE `sbs_proj`;
 
+/*Table structure for table `Check` */
+
+DROP TABLE IF EXISTS `Check`;
+
+CREATE TABLE `Check` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `time` datetime NOT NULL,
+  `reservation` char(100) NOT NULL,
+  `name` char(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `reservation` (`reservation`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `Check` */
+
+insert  into `Check`(`id`,`time`,`reservation`,`name`) values 
+(1,'2024-04-17 18:17:19','7타임','짱구'),
+(7,'2024-04-18 18:22:59','','123'),
+(12,'2024-04-18 18:33:35',' 타임','예지'),
+(14,'2024-04-18 18:37:25','user1_타임','유나'),
+(15,'2024-04-18 18:41:22','qwer_타임','채령'),
+(16,'2024-04-18 18:42:20','1타임','예지'),
+(17,'2024-04-18 18:43:21','2타임','예지');
+
+/*Table structure for table `Cul` */
+
+DROP TABLE IF EXISTS `Cul`;
+
+CREATE TABLE `Cul` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_name` char(100) NOT NULL,
+  `regDate` datetime NOT NULL,
+  `updateDate` datetime NOT NULL,
+  `STATUS` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `member_name` (`member_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `Cul` */
+
+insert  into `Cul`(`id`,`member_name`,`regDate`,`updateDate`,`STATUS`) values 
+(1,'호올리','2024-04-18 16:07:16','2024-04-18 16:07:16','미출석'),
+(2,'유리','2024-04-18 16:07:16','2024-04-18 16:07:16','출석'),
+(3,'예지','2024-04-18 16:09:48','2024-04-18 16:09:48','출석');
+
 /*Table structure for table `article` */
 
 DROP TABLE IF EXISTS `article`;
@@ -28,7 +73,7 @@ CREATE TABLE `article` (
   `body` text NOT NULL,
   `memberId` int(10) unsigned NOT NULL,
   `boardId` int(10) unsigned NOT NULL,
-  `hit` int(10) unsigned NOT NULL,
+  `hit` int(100) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `boardId` (`boardId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -36,9 +81,9 @@ CREATE TABLE `article` (
 /*Data for the table `article` */
 
 insert  into `article`(`id`,`regDate`,`updateDate`,`title`,`body`,`memberId`,`boardId`,`hit`) values 
-(1,'2024-04-12 15:43:06','2024-04-12 15:43:06','test','test',1,1,0),
-(2,'2024-04-12 15:44:06','2024-04-12 15:44:06','오늘도 좋은하루','굳',2,2,0),
-(3,'2024-04-12 15:44:50','2024-04-12 15:48:01','쫀하','굳굳',3,2,0);
+(1,'2024-04-17 18:17:19','2024-04-17 18:17:19','제목1','내용1',1,1,50),
+(2,'2024-04-17 18:17:19','2024-04-17 18:17:19','제목2','내용2',2,1,7),
+(3,'2024-04-17 18:17:19','2024-04-17 18:17:19','제목3','내용3',2,2,30);
 
 /*Table structure for table `articleReply` */
 
@@ -58,8 +103,8 @@ CREATE TABLE `articleReply` (
 /*Data for the table `articleReply` */
 
 insert  into `articleReply`(`id`,`regDate`,`updateDate`,`body`,`memberId`,`articleId`) values 
-(1,'2024-04-12 15:42:12','2024-04-12 15:42:12','댓글1',1,2),
-(2,'2024-04-12 15:42:12','2024-04-12 15:42:12','댓글2',2,1);
+(1,'2024-04-17 18:17:19','2024-04-17 18:17:19','댓글1',1,2),
+(2,'2024-04-17 18:17:19','2024-04-17 18:17:19','댓글2',2,1);
 
 /*Table structure for table `board` */
 
@@ -78,8 +123,8 @@ CREATE TABLE `board` (
 /*Data for the table `board` */
 
 insert  into `board`(`id`,`regDate`,`updateDate`,`code`,`name`) values 
-(1,'2024-04-12 15:42:12','2024-04-12 15:42:12','notice','공지'),
-(2,'2024-04-12 15:42:12','2024-04-12 15:42:12','free','자유');
+(1,'2024-04-17 18:17:19','2024-04-17 18:17:19','notice','공지'),
+(2,'2024-04-17 18:17:19','2024-04-17 18:17:19','free','자유');
 
 /*Table structure for table `member` */
 
@@ -94,14 +139,15 @@ CREATE TABLE `member` (
   `name` char(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `loginId` (`loginId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `member` */
 
 insert  into `member`(`id`,`regDate`,`updateDate`,`loginId`,`loginPw`,`name`) values 
-(1,'2024-04-12 15:42:12','2024-04-12 15:42:12','admin','admin','관리자'),
-(2,'2024-04-12 15:42:12','2024-04-12 15:42:12','user','user','황예지'),
-(3,'2024-04-12 15:42:12','2024-04-12 15:42:12','user1','user1','신유나');
+(1,'2024-04-17 18:17:19','2024-04-17 18:17:19','admin','admin','관리자'),
+(2,'2024-04-17 18:17:19','2024-04-17 18:17:19','user','user','예지'),
+(3,'2024-04-17 18:17:19','2024-04-17 18:17:19','user1','user1','유나'),
+(4,'2024-04-17 18:17:19','2024-04-17 18:17:19','qwer','qwer','채령');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

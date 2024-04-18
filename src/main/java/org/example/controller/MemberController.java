@@ -14,6 +14,9 @@ public class MemberController extends Controller {
     private MemberService memberService;
     private Session session;
 
+    public Member memberId(){
+        return session.getLoginedMember();
+    }
 
     public MemberController() {
         sc = Container.getScanner();

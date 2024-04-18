@@ -1,5 +1,8 @@
 package org.example.dto;
 
+
+
+
 public class Cul {
     public String name;
     public String checkStatus;
