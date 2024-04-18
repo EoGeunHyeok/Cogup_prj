@@ -1,8 +1,10 @@
 package org.example.controller;
 
 import org.example.container.Container;
+import org.example.dao.MemberDao;
 import org.example.dto.Member;
 import org.example.service.ArticleService;
+import org.example.service.MemberService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,9 +17,11 @@ public class CulController extends Controller {
     private Date date = new Date();
     private SimpleDateFormat simpl = new SimpleDateFormat("yyyy년 MM월 dd일");
     private ArrayList<StuInfo> studentsInfo = new ArrayList<>();
+    public MemberService memberService;
 
     public CulController() {
         session = Container.getSession();
+        memberService = new MemberService();
     }
 
     private void joinStudent(String name) {
@@ -51,7 +55,11 @@ public class CulController extends Controller {
         System.out.println("|번호| 이름 | 출석상태 | 최근 출석시간");
         for (int i = 0; i < studentsInfo.size(); i++) {
             System.out.println("| " + (i + 1) + " |" + studentsInfo.get(i).name + "|  " + studentsInfo.get(i).checkStatus + "     | " + studentsInfo.get(i).checkTime);
+
+            memberService.cul(studentsInfo.get(i).name, studentsInfo.get(i).checkStatus, studentsInfo.get(i).checkTime);
         }
+
+
     }
 
     public void doAction(String action, String actionMethodName) {
@@ -91,6 +99,7 @@ public class CulController extends Controller {
                     return;
                 }
                 studentCheck(num);
+
                 break;
             case "확인":
                 studentList();

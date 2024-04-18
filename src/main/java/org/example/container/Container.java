@@ -17,6 +17,7 @@ public class Container {
     public static DBConnection dbConnection;
     public static ArticleDao articleDao;
     public static MemberDao memberDao;
+
     public static ArticleService articleService;
     public static MemberService memberService;
     public static ExportService exportService;

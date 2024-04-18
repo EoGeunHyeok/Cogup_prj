@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.container.Container;
 import org.example.db.DBConnection;
+import org.example.dto.Cul;
 import org.example.dto.Member;
 
 
@@ -65,6 +66,10 @@ public class MemberDao extends Dao {
         }
         return new Member(row);
     }
+
+
+
+
 
 }
 
