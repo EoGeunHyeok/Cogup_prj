@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.container.Container;
+import org.example.dto.Article;
 import org.example.dto.Check;
 import org.example.dto.Member;
 import org.example.service.MemberService;
@@ -40,6 +41,7 @@ public class CheckController extends Controller {
         System.out.println("예약을 취소하실 시간을 입력해주세요:");
         int timeSlot = scanner.nextInt();
 
+
         if (timeSlot < 1 || timeSlot > 6) {
             System.out.println("잘못된 입력입니다.");
             return;
@@ -51,7 +53,9 @@ public class CheckController extends Controller {
             if (name.equals(reservations[timeSlot - 1])) {
                 seat[timeSlot - 1] = 0;
                 reservations[timeSlot - 1] = null;
+                memberService.cancelCheck(timeSlot);
                 System.out.println("예약이 취소되었습니다.");
+
             } else {
                 System.out.println("비밀번호가 일치하지 않습니다.");
             }
@@ -130,7 +134,7 @@ public class CheckController extends Controller {
                     String checkPw = name;
                     memberService.check(loginedMember.getName(), reservation, checkPw, checkPw);
                     System.out.println("♣♣♣ 예약이 완료되었습니다. ♣♣♣");
-                    System.out.printf("★★★ [%s타임] %s님의 예약이 완료되었습니다. ★★★ \n", seat[y-1] , loginedMember.getName());
+                    System.out.printf("★★★ [%s] %s님의 예약이 완료되었습니다. ★★★ \n", reservation , loginedMember.getName());
                     System.out.printf("★★★ (확인 비밀번호 : %s)  ★★★ \n", name );
                 }
             } else {

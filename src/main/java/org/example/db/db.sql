@@ -150,14 +150,6 @@ CREATE TABLE `Check` ( #예약
     `name` CHAR(100) NOT NULL
 );
 
-INSERT INTO `check`
-SET `time` = NOW(),
-`reservation` = '7타임',
- checkPw = '999',
-`name` = '유리';
-
-
-
 
 DROP TABLE Cul;
 
@@ -170,15 +162,6 @@ CREATE TABLE Cul (
     `STATUS` VARCHAR(20) NOT NULL
 );
 
-INSERT INTO Cul
-SET member_name = '오수',
-regDate = NOW(),
-updateDate = NOW(),
-`status` = '미출석';
-
-
-INSERT INTO Cul ( member_name, regDate, updateDate, STATUS)
-VALUES ( '짱아', NOW(), NOW(), '출석');
 
 SELECT * FROM Cul;
 

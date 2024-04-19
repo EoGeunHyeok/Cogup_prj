@@ -45,10 +45,16 @@ public class MemberService {
     public void check(String name, String reservation , String checkPw, String time){
         Check check = new Check(name, reservation, checkPw, time);
         checkDao.addCheck(check);
+
     }
 
     public Member getLoginedMember(String loginId) {
         return memberDao.getMemberByLoginId(loginId);
 
     }
+
+    public void cancelCheck(int timeSlot){
+            checkDao.cancelCheck(timeSlot);
+        }
+
 }
