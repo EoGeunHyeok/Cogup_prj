@@ -64,7 +64,7 @@ public class CulController extends Controller {
 
     public void doAction(String action, String actionMethodName) {
         switch (actionMethodName) {
-            case "0":
+            case "등록":
                 break;
             case "체크":
                 Member loginedMember = session.getLoginedMember();

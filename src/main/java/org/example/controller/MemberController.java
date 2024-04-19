@@ -14,14 +14,17 @@ public class MemberController extends Controller {
     private MemberService memberService;
     private Session session;
 
+    private CheckController checkController;
+
     public Member memberId(){
         return session.getLoginedMember();
     }
 
-    public MemberController() {
+    public MemberController(int[] seat) {
         sc = Container.getScanner();
         memberService = Container.memberService;
         session = Container.getSession();
+        this.checkController = new CheckController(seat);
     }
 
     public void doAction(String cmd, String actionMethodName) {
@@ -49,6 +52,7 @@ public class MemberController extends Controller {
 
     public void doMemberInfo() {
         Member loginedMember = session.getLoginedMember();
+
         if (loginedMember == null) {
             System.out.println("로그인 후 이용해주세요.");
             return;
@@ -58,6 +62,8 @@ public class MemberController extends Controller {
         System.out.println("이름: " + loginedMember.getName());
         System.out.println("아이디: " + loginedMember.getLoginId());
         System.out.println("비밀번호: " + loginedMember.getLoginPw());
+        System.out.println("예약 현황 : ");
+        checkController.printReservedTimes();
 
     }
 

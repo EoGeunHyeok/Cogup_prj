@@ -102,6 +102,17 @@ public class CheckController extends Controller {
             return;
         }
 
+        boolean[] alreadyReserved = new boolean[seat.length];
+
+        // 이미 예약된 시간을 체크하여 배열에 저장
+        for (int i = 0; i < reservations.length; i++) {
+            if (reservations[i] != null && reservations[i].equals(loginedMember.getName())) {
+                alreadyReserved[i] = true;
+            }
+        }
+
+
+
         while (pax > 0) {
             System.out.println("== 금일 예약하실 시간을 입력해주세요 ==");
             System.out.println("13시 [1타임], 14시 [2타임], 15시 [3타임], 16시 [4타임], 17시 [5타임], 18시 [6타임] ");
@@ -126,7 +137,7 @@ public class CheckController extends Controller {
                 if (cancel.equalsIgnoreCase("1")) {
                     seat[y - 1] = 0;
                     pax++;
-                    reservations[y - 1] = null;
+                    reservations[y - 1] = loginedMember.getName();
                     System.out.println("♣♣♣ 예약이 취소되었습니다. ♣♣♣");
                 } else {
                     MemberService memberService = new MemberService();

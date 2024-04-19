@@ -32,7 +32,7 @@ public class App {
         System.out.println("7. 출석 체크 / 출석 확인 --> 회원전용.");
         System.out.println(" -------------------------------------- ");
 
-        MemberController memberController = new MemberController();
+        MemberController memberController = new MemberController(seats);
         ArticleController articleController = new ArticleController();
         ExportController exportController = new ExportController();
         CheckController checkController = new CheckController(seats);
