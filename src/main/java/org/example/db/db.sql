@@ -99,21 +99,21 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user',
 loginPw = 'user',
-`name` = '예지';
+`name` = '짱구';
 
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user1',
 loginPw = 'user1',
-`name` = '유나';
+`name` = '맹구';
 
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'qwer',
 loginPw = 'qwer',
-`name` = '채령';
+`name` = '철수';
 
 
 SELECT * FROM `member`;
@@ -146,15 +146,15 @@ CREATE TABLE `Check` ( #예약
      id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `time` DATETIME NOT NULL,
     `reservation` CHAR(100) UNIQUE NOT NULL UNIQUE,
-     pw CHAR(100) NOT NULL,
+     checkPw CHAR(100) NOT NULL,
     `name` CHAR(100) NOT NULL
 );
 
 INSERT INTO `check`
 SET `time` = NOW(),
-`reservation` = '7',
-pw = '123'
-`name` = '짱구';
+`reservation` = '7타임',
+ checkPw = '999',
+`name` = '유리';
 
 
 
@@ -171,14 +171,14 @@ CREATE TABLE Cul (
 );
 
 INSERT INTO Cul
-SET member_name = '호올리',
+SET member_name = '오수',
 regDate = NOW(),
 updateDate = NOW(),
 `status` = '미출석';
 
 
 INSERT INTO Cul ( member_name, regDate, updateDate, STATUS)
-VALUES ( '유리', NOW(), NOW(), '출석');
+VALUES ( '짱아', NOW(), NOW(), '출석');
 
 SELECT * FROM Cul;
 

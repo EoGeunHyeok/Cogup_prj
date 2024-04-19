@@ -42,8 +42,8 @@ public class MemberService {
         culDao.addAttendance(cul);
     }
 
-    public void check(String name, String reservation, String time){
-        Check check = new Check(name, reservation, time);
+    public void check(String name, String reservation , String checkPw, String time){
+        Check check = new Check(name, reservation, checkPw, time);
         checkDao.addCheck(check);
     }
 

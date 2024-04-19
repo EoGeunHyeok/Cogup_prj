@@ -1,9 +1,11 @@
 package org.example.controller;
 
 import org.example.container.Container;
+import org.example.dto.Check;
 import org.example.dto.Member;
 import org.example.service.MemberService;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CheckController extends Controller {
@@ -84,6 +86,8 @@ public class CheckController extends Controller {
         System.out.printf("예약 타임 : ");
     }
 
+
+
     public void reserveTime() {
         Scanner scanner = new Scanner(System.in);
         int pax = 6;
@@ -123,10 +127,11 @@ public class CheckController extends Controller {
                 } else {
                     MemberService memberService = new MemberService();
                     String reservation = y + "타임";
-                    memberService.check(loginedMember.getName(), reservation, "예약시간");
+                    String checkPw = name;
+                    memberService.check(loginedMember.getName(), reservation, checkPw, checkPw);
                     System.out.println("♣♣♣ 예약이 완료되었습니다. ♣♣♣");
-                    System.out.printf("★★★ [%s타임] %s님의 예약이 완료되었습니다. ★★★ \n", reservations, loginedMember.getName());
-                    System.out.printf("★★★ (확인 비밀번호 : %s)  ★★★ \n", name);
+                    System.out.printf("★★★ [%s타임] %s님의 예약이 완료되었습니다. ★★★ \n", seat[y-1] , loginedMember.getName());
+                    System.out.printf("★★★ (확인 비밀번호 : %s)  ★★★ \n", name );
                 }
             } else {
                 System.out.println("예약이 완료된 시간입니다. 다시 예약해주세요.");
