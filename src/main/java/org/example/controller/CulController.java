@@ -44,6 +44,11 @@ public class CulController extends Controller {
         int hour = Integer.parseInt(str.substring(0, 2));
         int minute = Integer.parseInt(str.substring(3, 5));
 
+        if (studentsInfo.get(num).checkStatus != null && studentsInfo.get(num).checkTime != null) {
+            System.out.println("당일 중복 출석을 할 수 없습니다.");
+            return;
+        }
+
         studentsInfo.get(num).checkStatus = "출석";
         studentsInfo.get(num).checkTime = str;
 
