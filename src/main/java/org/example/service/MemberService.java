@@ -10,6 +10,8 @@ import org.example.dto.Check;
 import org.example.dto.Cul;
 import org.example.dto.Member;
 
+import java.util.List;
+
 public class MemberService {
     public MemberDao memberDao;
     public CulDao culDao;
@@ -57,4 +59,7 @@ public class MemberService {
             checkDao.cancelCheck(timeSlot);
         }
 
+    public List<Cul> getForPrintCuls(String memberName) {
+        return culDao.getForPrintCuls(memberName);
+    }
 }

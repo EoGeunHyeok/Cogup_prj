@@ -2,6 +2,8 @@ package org.example.controller;
 
 import org.example.container.Container;
 import org.example.dao.MemberDao;
+import org.example.dto.Article;
+import org.example.dto.Cul;
 import org.example.dto.Member;
 import org.example.service.ArticleService;
 import org.example.service.MemberService;
@@ -9,6 +11,7 @@ import org.example.service.MemberService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class CulController extends Controller {
@@ -41,22 +44,30 @@ public class CulController extends Controller {
         int hour = Integer.parseInt(str.substring(0, 2));
         int minute = Integer.parseInt(str.substring(3, 5));
 
+        studentsInfo.get(num).checkStatus = "출석";
+        studentsInfo.get(num).checkTime = str;
+
+        memberService.cul(studentsInfo.get(num).name, studentsInfo.get(num).checkStatus, studentsInfo.get(num).checkTime);
+
         if (hour >= 9) {
             System.out.println("[출석체크 완료]");
             System.out.println("현재 시각 : " + str);
             System.out.println("출석 하였습니다.");
-            studentsInfo.get(num).checkStatus = "출석";
-            studentsInfo.get(num).checkTime = str;
         }
     }
 
     private void studentList() {
         System.out.println("<< 출석 현황 >>");
-        System.out.println("|번호| 이름 | 출석상태 | 최근 출석시간");
-        for (int i = 0; i < studentsInfo.size(); i++) {
-            System.out.println("| " + (i + 1) + " |" + studentsInfo.get(i).name + "|  " + studentsInfo.get(i).checkStatus + "     | " + studentsInfo.get(i).checkTime);
+        System.out.println("| 이름 | 출석상태 | 최근 출석시간");
 
-            memberService.cul(studentsInfo.get(i).name, studentsInfo.get(i).checkStatus, studentsInfo.get(i).checkTime);
+        String memberName = session.getLoginedMember().getName();
+        List<Cul> forPrintCuls = memberService.getForPrintCuls(memberName);
+
+
+        for (int i = forPrintCuls.size() - 1; i >= 0; i--) {
+            Cul cul = forPrintCuls.get(i);
+
+            System.out.printf("| %4s | %4s | %s\n", cul.member_name, cul.STATUS, cul.regDate);
         }
 
 
@@ -64,8 +75,6 @@ public class CulController extends Controller {
 
     public void doAction(String action, String actionMethodName) {
         switch (actionMethodName) {
-            case "등록":
-                break;
             case "체크":
                 Member loginedMember = session.getLoginedMember();
                 if (loginedMember != null) {
@@ -112,7 +121,7 @@ public class CulController extends Controller {
 
     private static class StuInfo {
         String name;
-        String checkStatus = " 미출석  ";
+        String checkStatus = "미출석";
         String checkTime;
 
         public StuInfo(String name) {

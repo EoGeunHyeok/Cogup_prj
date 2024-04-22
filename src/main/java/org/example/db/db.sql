@@ -156,20 +156,20 @@ DROP TABLE Cul;
 
 CREATE TABLE Cul (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    member_name CHAR(100) UNIQUE NOT NULL,
+    member_name CHAR(100)  NOT NULL,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     `STATUS` VARCHAR(20) NOT NULL
 );
 
 
-SELECT * FROM Cul;
+
+
+SELECT * FROM `member`;
 
 SELECT * FROM board;
 
 SELECT * FROM article;
-
-SELECT * FROM `member`;
 
 SELECT * FROM `Check`;
 
