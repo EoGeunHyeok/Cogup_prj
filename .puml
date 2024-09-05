@@ -1,0 +1,60 @@
+@startuml ER_Diagram
+entity "Check" {
+  *id : int
+  *time : datetime
+  *reservation : char(100)
+  *checkPw : char(100)
+  *name : char(100)
+}
+
+entity "Cul" {
+  *id : int
+  *member_name : char(100)
+  *regDate : datetime
+  *updateDate : datetime
+  *STATUS : varchar(20)
+}
+
+entity "article" {
+  *id : int
+  *regDate : datetime
+  *updateDate : datetime
+  *title : char(100)
+  *body : text
+  *memberId : int
+  *boardId : int
+  *hit : int
+}
+
+entity "articleReply" {
+  *id : int
+  *regDate : datetime
+  *updateDate : datetime
+  *body : char(100)
+  *memberId : int
+  *articleId : int
+}
+
+entity "board" {
+  *id : int
+  *regDate : datetime
+  *updateDate : datetime
+  *code : char(100)
+  *name : char(100)
+}
+
+entity "member" {
+  *id : int
+  *regDate : datetime
+  *updateDate : datetime
+  *loginId : char(100)
+  *loginPw : char(100)
+  *name : char(100)
+}
+
+Check }|..|{ article : "references"
+articleReply }|..|{ article : "references"
+article }|..|{ board : "references"
+article }|..|{ member : "references"
+Cul }|..|{ member : "references"
+@enduml
