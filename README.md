@@ -24,6 +24,29 @@
 
 ---------------------------
 
+## 🧑‍🤝‍🧑 맴버구성
+
+---------------------------
+
+<table><thead>
+  <tr>
+    <th>어근혁</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/c35b7954-7d27-4277-a572-07b875651c0b" alt="Image" width="200" height="200"></td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/EoGeunHyeok" target="_blank" rel="noopener noreferrer">@EoGeunHyeok</a></td>
+  </tr>
+</tbody>
+</table>
+
+
+
+
+---------------------------
+
 
 ## 🔗 ER-DIAGRAM
 
@@ -151,4 +174,27 @@
     - 검색어 입력란에 "출석 확인" 이라는 검색어를 입력하면 이동 할 수 있습니다.
     - 본인의 출석 현황을 확인 할 수 있습니다.
 
+----------------------------------
 
+## 🔥 트러블 슈팅
+
+--------------------------
+
+🚧 당일 회원 중복 출석 원인 분석 및 해결 🚨
+
+🛑 원인
+
+회원 출석 페이지 에서 당일날 이미 출석을 한 회원은 중복 출석이 불가능 해야 하지만
+재 출석이 표면상으로는 되는것 처럼 보였지만 DB에서 오류가 발생함
+
+제약 조건을 잘못 걸었거나 추가하지 않아서 생긴 문제라고 의심을 하였음.
+
+
+🚥 해결
+- if (studentsInfo.get(num).checkStatus != null && studentsInfo.get(num).checkTime != null) {
+System.out.println("당일 중복 출석을 할 수 없습니다.");
+return;
+}
+
+라는 제약 조건을 걸어서 당일에 DB에 출석 정보가 업데이트가 되면 중복 출석이 불가능하도록
+하였음.
